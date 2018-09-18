@@ -23,6 +23,6 @@ jobs:
 
       - run: npm install
       - run: gcloud auth activate-service-account --key-file=gcloud-service-key.json
-      - run: gsutil cp gs://staging.human-resources-216715.appspot.com/app.yaml .
-      - run: gcloud config set project human-resources-216715
-      - run: gcloud app deploy ./app.yaml --project=human-resources-216715 --promote
+      - run: gsutil cp gs://staging.${PROJECT_NAME}.appspot.com/app.yaml .
+      - run: gcloud config set project ${PROJECT_NAME}
+      - run: gcloud app deploy ./app.yaml --project=${PROJECT_NAME} --promote --quiet
