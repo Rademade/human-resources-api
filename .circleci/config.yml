@@ -5,9 +5,10 @@ jobs:
       - image: google/cloud-sdk
 
     steps:
+      - checkout:
       - run:
-        name: Store Service Account
-        command: echo $GCLOUD_SERVICE_KEY > ${HOME}/gcloud-service-key.json
+          name: Store Service Account
+          command: echo $GCLOUD_SERVICE_KEY > ${HOME}/gcloud-service-key.json
       - run: yarn install
       - run: gsutil cp gs://staging.human-resources-216715.appspot.com/app.yaml .
       - run: gcloud app deploy
