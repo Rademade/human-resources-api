@@ -1,0 +1,13 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: google/cloud-sdk
+
+    steps:
+      - run:
+        name: Store Service Account
+        command: echo $GCLOUD_SERVICE_KEY > ${HOME}/gcloud-service-key.json
+      - run: yarn install
+      - run: gsutil cp gs://staging.human-resources-216715.appspot.com/app.yaml .
+      - run: gcloud app deploy
