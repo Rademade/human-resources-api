@@ -10,7 +10,7 @@ jobs:
       - checkout
       - run:
           name: Store Service Account
-          command: echo $GCLOUD_SERVICE_KEY > ${HOME}/gcloud-service-key.json
+          command: echo $GCLOUD_SERVICE_KEY > ${HOME}/project/gcloud-service-key.json
 
       - run:
           name: Install Node.js
