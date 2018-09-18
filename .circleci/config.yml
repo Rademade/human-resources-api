@@ -13,13 +13,10 @@ jobs:
 
       - run:
           name: Install Node.js
-          command: |
-            curl -sL https://deb.nodesource.com/setup_8.x | -E bash -
-            apt-get install -y nodejs
-
+          command: apt-get install nodejs
       - run:
           name: Install latest NPM
-          command: npm install npm@9.5.0 -g
+          command: npm install npm@latest -g
 
       - run: npm install
       - run: gsutil cp gs://staging.human-resources-216715.appspot.com/app.yaml .
