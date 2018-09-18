@@ -21,7 +21,7 @@ jobs:
           name: Install yarn
           command: apt-get install yarn --yes
 
-      - run: yarn install
+      - run: npm install
       - run: gcloud auth activate-service-account --key-file=gcloud-service-key.json
       - run: gsutil cp gs://staging.human-resources-216715.appspot.com/app.yaml .
       - run: gcloud app deploy
