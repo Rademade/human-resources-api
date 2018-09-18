@@ -48,3 +48,7 @@ Thumbs.db
 .elasticbeanstalk/*
 !.elasticbeanstalk/*.cfg.yml
 !.elasticbeanstalk/*.global.yml
+
+# files
+package-lock.json
+yarn.lock
