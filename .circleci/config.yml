@@ -3,13 +3,24 @@ jobs:
   build:
     docker:
       - image: google/cloud-sdk
-      - image: circleci/node:10-browsers-legacy
 
 
     steps:
+      - checkout
       - run:
           name: Store Service Account
           command: echo $GCLOUD_SERVICE_KEY > ${HOME}/gcloud-service-key.json
+
+      - run:
+          name: Install Node.js
+          command: |
+            curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
+            sudo apt-get install -y nodejs
+
+      - run:
+          name: Install latest NPM
+          command: sudo npm install npm@9.5.0 -g
+
       - run: npm install
       - run: gsutil cp gs://staging.human-resources-216715.appspot.com/app.yaml .
       - run: gcloud app deploy
