@@ -1,11 +1,24 @@
 import User from "../models/user";
+import jwt from 'jsonwebtoken';
 
 class UsersController {
 
     static index(req, res) {
-        User.findAll({
-             attributes: ['id','firstName', 'lastName', 'email', 'createdAt', 'updatedAt']
-         }).then(data => res.json(data));
+      jwt.verify(req.token, 'secretKey', (err, authData) => {
+        if (err) {
+          res.sendStatus(401);
+        } else {
+          User.findAll({
+            attributes: ['id','firstName', 'lastName', 'email', 'createdAt', 'updatedAt']
+          }).then(data => {
+            res.json({
+              data,
+              authData
+            })
+          });
+        }
+      })
+
     };
 
     static create(req) {

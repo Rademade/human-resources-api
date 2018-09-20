@@ -1,5 +1,5 @@
 const Sequelize = require('sequelize');
-
+require('dotenv').config();
 export default new Sequelize(
   process.env.DATABASE_NAME,
   process.env.DATABASE_USER,
