@@ -1,11 +1,17 @@
 import express from 'express';
-import UsersController from "../controllers/UsersController";
+import usersController from "../controllers/UsersController";
 import verifyToken  from "./verify-token";
 
 const router  = express.Router();
 
-router.get('/users', verifyToken, UsersController.index);
-router.post('/users', verifyToken,UsersController.create);
-router.delete('/users/:id',verifyToken, UsersController.destroy);
+router.get('/users', verifyToken, function (req,res) {
+  usersController.index(req,res)
+});
+router.post('/users', function (req,res) {
+  usersController.create(req,res)
+});
+router.delete('/users/:id',verifyToken, function(req,res) {
+  usersController.destroy(req,res);
+});
 
 module.exports = router;
