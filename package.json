@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "PORT=3000 nodemon --exec babel-node -- ./bin/server ",
+    "start": "babel-node -- ./bin/server",
+    "dev": "PORT=3000 nodemon --exec babel-node -- ./bin/server ",
     "sequalize": "node ./node_modules/.bin/sequelize",
     "config-db": "gsutil cp gs://staging.human-resources-216715.appspot.com/config.json ./config"
   },
