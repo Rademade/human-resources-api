@@ -16,18 +16,21 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-
-// let whitelist = ['https://human-resources-web.firebaseapp.com', 'http://localhost:3000'];
-let corsOptions = { origin: false }
-// let corsOptions = {
-//   origin: function (origin, callback) {
-//     if (whitelist.indexOf(origin) !== -1) {
-//       callback(null, true)
-//     } else {
-//       callback(new Error('Not allowed by CORS'))
-//     }
-//   }
-// };
+let corsOptions = {};
+let whitelist = ['https://human-resources-web.firebaseapp.com'];
+if (process.env.NODE_ENV === 'production') {
+  corsOptions = {
+    origin: function (origin, callback) {
+      if (whitelist.indexOf(origin) !== -1) {
+        callback(null, false)
+      } else {
+        callback(new Error('Not allowed by CORS'))
+      }
+    }
+  };
+} else {
+  corsOptions = {origin: false}
+}
 
 app.use('/index', function (req,res) {
   res.sendFile(path.resolve(__dirname, 'public/index.html'));
