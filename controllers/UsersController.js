@@ -1,6 +1,7 @@
 import User from "../models/user";
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
+const uuidv4 = require('uuid/v4');
 
 class UsersController {
 
@@ -25,13 +26,13 @@ class UsersController {
   create(req, res) {
     if (req.body.firstName && req.body.lastName && req.body.email && req.body.password) {
       User.findOrCreate({ where: {
+          id: uuidv4(),
           firstName: req.body.firstName,
           lastName: req.body.lastName,
           email: req.body.email,
           password: bcrypt.hashSync(req.body.password, 10)
         }}).spread((user, created) => {
         if (created) {
-          console.log(user);
           res.json(user)
         } else {
           res.status(400).send({error: 'User Already exist'})
@@ -57,7 +58,10 @@ class UsersController {
       },
       attributes: ['email','firstName','lastName','password',]
     }).then((user) => {
-      return user.dataValues;
+      if (user) {
+        return user.dataValues;
+      }
+      return null;
     }).catch((error) => {
       return error;
     })
