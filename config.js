@@ -59,10 +59,10 @@ nconf
     OAUTH2_CLIENT_ID: process.env.OAUTH2_CLIENT_ID,
     OAUTH2_CLIENT_SECRET: process.env.OAUTH2_CLIENT_SECRET,
     OAUTH2_CALLBACK: process.env.OAUTH2_CALLBACK,
-    PORT: 8080,
+    PORT: process.env.PORT,
 
     // Set this a secret string of your choosing
-    SECRET: process.env.SECRET
+    SECRET: 'secretKey'
   });
 
 // Check for required settings
