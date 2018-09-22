@@ -10,21 +10,21 @@ const passport = require('passport');
 const config = require('./config');
 
 let app = express();
-let corsOptions = {};
-let whitelist = ['https://human-resources-web.firebaseapp.com','http://localhost:3000'];
-if (process.env.NODE_ENV === 'production') {
-  corsOptions = {
-    origin: function (origin, callback) {
-      if (whitelist.indexOf('https://human-resources-web.firebaseapp.com') || whitelist.indexOf('http://localhost:3000')) {
-        callback(null, false);
-      } else {
-        callback(new Error('Not allowed by CORS'));
-      }
-    }
-  };
-} else {
-  corsOptions = {origin: false}
-}
+// let corsOptions = {};
+// let whitelist = ['https://human-resources-web.firebaseapp.com','http://localhost:3000'];
+// if (process.env.NODE_ENV === 'production') {
+//   corsOptions = {
+//     origin: function (origin, callback) {
+//       if (whitelist.indexOf('https://human-resources-web.firebaseapp.com') || whitelist.indexOf('http://localhost:3000')) {
+//         callback(null, false);
+//       } else {
+//         callback(new Error('Not allowed by CORS'));
+//       }
+//     }
+//   };
+// } else {
+//   corsOptions = {origin: false}
+// }
 
 app.use(logger('dev'));
 app.use(cors());
@@ -40,6 +40,6 @@ app.use(require('./routes/oauth2').router);
 app.use('/index', function (req,res) {
   res.sendFile(path.resolve(__dirname, 'public/index.html'));
 });
-app.use('/api', cors(corsOptions), routes);
+app.use('/api', cors({origin: false}), routes);
 
 module.exports = app;
