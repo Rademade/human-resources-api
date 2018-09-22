@@ -13,7 +13,7 @@ router.post('/auth', async (req,res) => {
         firstName: user.firstName,
         lastName: user.lastName,
         email: user.email
-      }, process.env.SECRET, {expiresIn: '1d'}, (err,token) => {
+      }, 'secretKey', {expiresIn: '1d'}, (err,token) => {
         res.json({
           token
         })

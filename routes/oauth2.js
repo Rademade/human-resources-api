@@ -121,7 +121,7 @@ router.get(
   // Redirect back to the original page, if any
   (req, res) => {
     const user = req.session.passport.user;
-    const token = jwt.sign({ firstName: user.name.split(' ')[0], lastName: user.name.split(' ')[1], email: user.email},process.env.SECRET, {expiresIn: '1d'});
+    const token = jwt.sign({ firstName: user.name.split(' ')[0], lastName: user.name.split(' ')[1], email: user.email},'secretKey', {expiresIn: '1d'});
     console.log(user);
     console.log(token);
     const redirect = req.session.oauth2return || process.env.FRONTEND_URL + '/sign/success?token=' + token;

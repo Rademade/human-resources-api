@@ -5,9 +5,9 @@ let logger = require('morgan');
 let expressValidator = require('express-validator');
 let routes = require('./routes');
 let cors = require('cors');
-const session = require('express-session');
 const passport = require('passport');
-const config = require('./config');
+// const session = require('express-session');
+// const config = require('./config');
 
 let app = express();
 // let corsOptions = {};
