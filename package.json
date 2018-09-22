@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "start": "nodemon --exec babel-node -- ./bin/server ",
-    "sequalize": "node ./node_modules/.bin/sequelize"
+    "sequalize": "node ./node_modules/.bin/sequelize",
+    "config-db": "gsutil cp gs://staging.human-resources-216715.appspot.com/config.json ./config"
   },
   "dependencies": {
     "babel": "^6.23.0",
@@ -19,7 +20,9 @@
     "express-validator": "^5.3.0",
     "jsonwebtoken": "^8.3.0",
     "morgan": "^1.9.0",
+    "nconf": "^0.10.0",
     "nodemon": "^1.17.5",
+    "passport-google-oauth20": "^1.0.0",
     "pg": "^7.4.3",
     "pg-hstore": "^2.3.2",
     "pg-promise": "^8.4.5",
@@ -27,5 +30,9 @@
     "sequelize-cli": "^4.0.0",
     "uuid": "^3.3.2"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "connect-memjs": "^0.2.1",
+    "express-session": "^1.15.6",
+    "passport": "^0.4.0"
+  }
 }
