@@ -17,16 +17,17 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-let whitelist = ['https://human-resources-web.firebaseapp.com'];
-let corsOptions = {
-  origin: function (origin, callback) {
-    if (whitelist.indexOf(origin) !== -1) {
-      callback(null, true)
-    } else {
-      callback(new Error('Not allowed by CORS'))
-    }
-  }
-};
+// let whitelist = ['https://human-resources-web.firebaseapp.com', 'http://localhost:3000'];
+let corsOptions = { origin: false }
+// let corsOptions = {
+//   origin: function (origin, callback) {
+//     if (whitelist.indexOf(origin) !== -1) {
+//       callback(null, true)
+//     } else {
+//       callback(new Error('Not allowed by CORS'))
+//     }
+//   }
+// };
 
 app.use('/index', function (req,res) {
   res.sendFile(path.resolve(__dirname, 'public/index.html'));
