@@ -6,9 +6,6 @@ let expressValidator = require('express-validator');
 let routes = require('./routes');
 let cors = require('cors');
 const passport = require('passport');
-// const session = require('express-session');
-// const config = require('./config');
-
 let app = express();
 app.use(logger('dev'));
 app.use(expressValidator());
@@ -20,7 +17,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(require('./routes/oauth2').router);
 app.use(cors({
-  origin: 'https://human-resources-web.firebaseapp.com'
+  origin: 'https://rademade.me'
 }));
 
 app.use('/index', function (req,res) {
