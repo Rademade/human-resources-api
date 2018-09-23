@@ -14,7 +14,9 @@
 'use strict';
 
 import jwt from 'jsonwebtoken';
-
+import User from '../models/user';
+import usersController from '../controllers/UsersController';
+const uuidv4 = require('uuid/v4');
 const express = require('express');
 const config = require('../config');
 require('dotenv').config();
@@ -119,12 +121,19 @@ router.get(
   ),
 
   // Redirect back to the original page, if any
-  (req, res) => {
+  async (req, res) => {
     const user = req.session.passport.user;
     const token = jwt.sign({ firstName: user.name.split(' ')[0], lastName: user.name.split(' ')[1], email: user.email},'secretKey', {expiresIn: '1d'});
-    console.log(user);
-    console.log(token);
+    const checkUser = await usersController.findUser(user.email);
     const redirect = req.session.oauth2return || process.env.FRONTEND_URL + '/sign/success?token=' + token;
+    if (!checkUser) {
+      User.findOrCreate({ where: {
+          id: uuidv4(),
+          firstName: user.name.split(' ')[0],
+          lastName: user.name.split(' ')[1],
+          email: user.email
+        }});
+    }
     delete req.session.oauth2return;
     res.redirect(redirect);
   }

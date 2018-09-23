@@ -56,7 +56,7 @@ class UsersController {
       where: {
         email: email
       },
-      attributes: ['email','firstName','lastName','password',]
+      attributes: ['email','firstName','lastName','password']
     }).then((user) => {
       if (user) {
         return user.dataValues;
